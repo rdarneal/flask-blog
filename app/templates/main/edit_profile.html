@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+{% set active_user_nav = 'edit_profile' %}
+
+{% block content %}
+<!-- Page content -->
+      <section class="container pt-5">
+        <div class="row">
+			{% include 'main/_yourprofile.html' %} 
+
+          <!-- Account details -->
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+              <h1 class="h2 pt-xl-1 pb-3">Account Details</h1>
+
+              <!-- Basic info -->
+              <h2 class="h5 text-primary mb-4">Basic info</h2>
+              <form action="" method="post" class="border-bottom pb-3 pb-lg-4">
+                {{ form.hidden_tag() }}
+				<div class="row pb-2">
+                  <div class="col-sm-6 mb-4">
+					{{ form.first_name(class_='form-control form-control-lg', type='text', id='fn') }}
+                    <label for="fn" class="form-label fs-base">First name</label>
+					{% for error in form.first_name.errors %}
+						<p class="text-danger fw-light">[{{ error }}]</p>
+						<script>
+							var element = document.getElementById('fn');
+							element.className += " " + 'is-invalid';
+						</script>
+					{% endfor %}
+                  </div>
+                  <div class="col-sm-6 mb-4">
+					{{ form.last_name(class_='form-control form-control-lg', type='text', id='ln') }}
+                    <label for="ln" class="form-label fs-base">Last Name</label>
+					{% for error in form.last_name.errors %}
+						<p class="text-danger fw-light">[{{ error }}]</p>
+						<script>
+							var element = document.getElementById('ln');
+							element.className += " " + 'is-invalid';
+						</script>
+					{% endfor %}
+                  </div>
+                  <div class="col-sm-6 mb-4">
+					{{ form.email(class_='form-control form-control-lg', type='email', id='email') }}
+                    <label for="email" class="form-label fs-base">Email address</label>
+					{% for error in form.email.errors %}
+						<p class="text-danger fw-light">[{{ error }}]</p>
+						<script>
+							var element = document.getElementById('email');
+							element.className += " " + 'is-invalid';
+						</script>
+					{% endfor %}
+                  </div>
+                  <div class="col-12 mb-4">
+					{{ form.about_me(class_='form-control form-control-lg', type='textarea', id='bio') }}
+                    <label for="bio" class="form-label fs-base">Bio <small class="text-muted">(optional)</small></label>
+					{% for error in form.about_me.errors %}
+						<p class="text-danger fw-light">[{{ error }}]</p>
+						<script>
+							var element = document.getElementById('bio');
+							element.className += " " + 'is-invalid';
+						</script>
+					{% endfor %}
+                  </div>
+                </div>
+                <div class="d-flex mb-3">
+                  	<button type="reset" class="btn btn-secondary me-3" href="{{ url_for('main.edit_profile') }}">Cancel</button>
+					{{ form.submit(class_='btn btn-primary', id="save_button", type='submit') }}
+                </div>
+              </form>
+          </div>
+        </div>
+      </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+  <div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='ico/apple-touch-icon.png') }}" alt="" width="72" height="57">
+    {% if current_user.is_anonymous %}
+    <h1 class="display-5 fw-bold">Microblog App</h1>
+    {% else %}
+    <h1 class="display-5 fw-bold">Hi {{ current_user.first_name }}</h1>
+    {% endif %}
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Welcome to this custom Microblog Flask template.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        {% if current_user.is_anonymous %}
+        <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="{{ url_for('auth.register') }}">Sign-up</a>
+        {% else %}
+        <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="{{ url_for('main.blog') }}">Blog something!</a>
+        <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="{{ url_for('main.user', email=current_user.email) }}">See your posts</a>
+        {% endif %}
+      </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+<!-- success toasts -->
+  {% with successes = get_flashed_messages(category_filter=["success"]) %}
+  {% if successes %}
+    <div class="toast-container top-0 end-0 p-3">
+      {% for message in successes %}      
+      <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+        <div class="toast-header bg-success text-white">
+          <i class="bx bx-check-circle fs-lg me-2"></i>
+          <span class="me-auto">Success</span>
+          <button class="btn-close btn-close-white ms-2 mb-1" type="button" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body text-success">{{ message }}</div>
+      </div>
+      {% endfor -%}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- warning toasts -->
+  {% with warnings = get_flashed_messages(category_filter=["warning"]) %}
+  {% if warnings %}
+    <div class="toast-container top-0 end-0 p-3">
+      {% for message in warnings %}      
+      <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+        <div class="toast-header bg-warning text-white">
+          <i class="bx bx-error fs-lg me-2"></i>
+          <span class="me-auto">Warning</span>
+          <button class="btn-close btn-close-white ms-2 mb-1" type="button" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body text-warning">{{ message }}</div>
+      </div>
+      {% endfor -%}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- info toasts -->
+  {% with info = get_flashed_messages(category_filter=["info"]) %}
+  {% if info %}
+    <div class="toast-container top-0 end-0 p-3">
+      {% for message in info %}      
+      <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+        <div class="toast-header bg-info text-white">
+          <i class="bx bx-info-circle fs-lg me-2"></i>
+          <span class="me-auto">Please note:</span>
+          <button class="btn-close btn-close-white ms-2 mb-1" type="button" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body text-info">{{ message }}</div>
+      </div>
+      {% endfor -%}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+<script>
+const toastElList = document.querySelectorAll('.toast');
+const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl));
+toastList.forEach(toast => toast.show());
+</script>

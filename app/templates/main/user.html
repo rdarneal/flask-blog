@@ -1,0 +1,28 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<!-- Page content -->
+      <section class="container pt-5">
+        <div class="row">
+			{% include 'main/_userprofile.html' %} 
+
+          <!-- Main Posts -->
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+                <!-- Blog categories -->
+                <section class="container mb-lg-4 pb-5">
+                    <h2 class="h5 text-primary mb-4">User Posts</h2>
+
+                    <!-- Category feed -->
+                    <ul class="list-unstyled mb-0">
+                        {% for post in posts.items %}
+                            {% include 'main/_post.html' %}
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% include 'main/_pagination.html' %}
+          </div>
+        </div>
+      </section>
+{% endblock %}
+
+{% block script_footer %}
+{% endblock %}

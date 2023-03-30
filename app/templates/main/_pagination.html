@@ -1,0 +1,41 @@
+<!-- Pagination -->
+<ul class="pagination justify-content-center mt-4">
+	<!-- first page, defined via view function -->
+	<li class="page-item">
+		<a href="{{ first_url }}" class="page-link">
+			<i class="bx bx-chevrons-left ms-n1 me-1"></i>
+		</a>
+	</li>
+	<!-- previous page, defined via view function -->
+	<li class="page-item {% if prev_url == None %}disabled{% endif %}">
+		<a href="{{ prev_url }}" class="page-link">
+			<i class="bx bx-chevron-left ms-n1 me-1"></i>
+		</a>
+	</li>
+	<!-- Iterate over -2, 0, +2  pagination numbers based on current position  -->
+	{% for i in posts.iter_pages(left_current=2, right_current=3) %}
+		<li class="page-item d-none d-sm-block {% if i == posts.page %}active{% endif %}">
+			{% if user %}
+				<!-- Use same _pagination template for specific user post view page -->
+				<a href="{{ url_for(template, page=i, email=user.email) }}" class="page-link">
+			{% else %}
+				<!-- Default case for blog/explore pages -->
+				<a href="{{ url_for(template, page=i) }}" class="page-link">
+			{% endif %}
+				{{ i }}
+			</a>
+		</li>
+	{% endfor %}
+	<!-- next page, defined via view function -->
+	<li class="page-item {% if next_url == None %}disabled{% endif %}">
+		<a href="{{ next_url }}" class="page-link">
+			<i class="bx bx-chevron-right ms-n1 me-1"></i>
+		</a>
+	</li>
+	<!-- last page, defined via view function -->
+	<li class="page-item">
+		<a href="{{ last_url }}" class="page-link">
+			<i class="bx bx-chevrons-right ms-n1 me-1"></i>
+		</a>
+	</li>
+</ul>

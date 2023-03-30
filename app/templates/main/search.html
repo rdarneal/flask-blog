@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+{% set active_page = "search" %}
+
+{% block content %}
+<section class="container mb-5 pt-3 pb-lg-5">
+    <h4 class="mt-4 mb-4 pt-lg-2 pg-lg-3 py-1">Search Results</h4>
+
+	<!-- Search results -->
+	<div class="pb-3">
+		{% for post in posts %}
+			{% include 'main/_post.html' %}
+		{% endfor %}
+	</div>
+	
+	<!-- Pagination -->
+	<ul class="pagination justify-content-center mt-4">
+		<li class="page-item{% if not prev_url %} disabled{% endif %}">
+			<a class="page-link" href="{{ prev_url or '#' }}">
+				<i class="bx bx-chevron-left ms-n1 me-1"></i>
+			</a>
+		</li>
+		<li class="page-item{% if not next_url %} disabled{% endif %}">
+			<a class="page-link" href="{{ next_url or '#' }}">
+				<i class="bx bx-chevron-right ms-n1 me-1"></i>
+			</a>
+		</li>
+	</ul>
+</section>
+{% endblock %}

@@ -1,0 +1,72 @@
+<header class="d-flex flex-column bg-light shadow-sm">
+  {% if g.search_form %}
+  <div id="searchCollapse" class="collapse order-md-2">
+    <div class="container py-3 pt-lg-2 pb-lg-4">
+      <div class="position-relative">
+        <form method="get" action="{{ url_for('main.search') }}">
+          {{ g.search_form.q(class_='form-control form-control-lg ps-5', placeholder=g.search_form.q.label.text) }}
+          <i class="bx bx-search fs-5 text-muted position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <div class="navbar navbar-expand-md order-md-1">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='ico/safari-pinned-tab.svg') }}" width="30" height="30">
+        Microblog
+      </a>
+
+      <button class="navbar-toggler ms-auto order-md-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      {% if g.search_form %}
+      <div class="d-flex align-items-right order-md-4 ms-3">
+          <a href="#searchCollapse" class="nav-link px-2" data-bs-toggle="collapse">
+            <i class="bx bx-search fs-4 mx-1"></i>
+          </a>
+      </div>
+      {% endif %}
+
+      {% if current_user.is_anonymous %}
+      <div class="nav-item order-md-5 ms-4">
+        <a class="btn btn-primary btn-sm {% if 'login' == active_page %}active{% endif %}" href="{{ url_for('auth.login') }}" role="button">
+          Login
+        </a>
+      </div>
+      {% else %}
+      <div class="nav dropdown d-block order-md-5 ms-4">
+        <a href="#" class="d-flex nav-link p-0" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="{{ current_user.avatar(128) }}" alt="" width="32" height="32" class="rounded-circle me-2">
+          <div class="d-none d-sm-block ps-2">
+            <div class="fs-xs lh-1 opacity-60">Hello,</div>
+            <div class="fs-sm dropdown-toggle">{{ current_user.first_name }}</div>
+          </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end text-small shadow">
+          <li><a class="dropdown-item" href="{{ url_for('main.user', email=current_user.email)}}">View posts</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('main.edit_profile')}}">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Sign out</a></li>
+        </ul>
+      </div>
+      {% endif %}
+      <nav class="collapse navbar-collapse" id="navbarNav">
+        <hr class="d-lg-none mt-3 mb-2">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if 'blog' == active_page %}active{% endif %}" href="{{ url_for('main.blog') }}">
+              Blog
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'explore' == active_page %}active{% endif %}" href="{{ url_for('main.explore') }}">
+              Explore
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

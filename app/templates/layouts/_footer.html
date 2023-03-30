@@ -1,0 +1,32 @@
+{% set footer_links = [
+  ('https://www.linkedin.com/in/robertdarneal/', 'fa-linkedin'),
+  ('https://github.com/rdarneal', 'fa-github'),
+  ('https://www.facebook.com/robertdarnealphotography', 'fa-facebook-f'),
+  ('#', 'fa-instagram')]
+  %}
+
+<footer class="text-center text-white bg-light">
+
+  <!-- Social Links -->
+  <div class="container pt-4">
+    <section class="mb-4">
+      {% for social_href, social_icon in footer_links %}
+      <a
+        class="btn btn-link btn-floating btn-lg text-dark m-1"
+        href="{{ social_href|e }}"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fa {{ social_icon|e }}"></i
+      ></a>
+      {% endfor %}
+    </section>
+  </div>
+
+  <!-- Copyright -->
+  <div class="text-center text-dark p-3 bg-light">
+    © 2023 Copyright:
+    <a class="text-dark" href="#">robertdarneal.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>

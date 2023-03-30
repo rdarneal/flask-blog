@@ -1,0 +1,22 @@
+<!-- Blog post -->
+<article class="card border-0 shadow-sm overflow-hidden mb-2">
+			<div class="card-body m-1">
+				<p>
+					{{ post.body }}
+				</p>
+				<hr class="my-2 mb-2">
+				<div class="d-flex align-items-center justify-content-between">
+					<a href="{{ url_for('main.user', email=post.author.email) }}" class="d-flex align-items-center fs-sm text-dark text-decoration-none me-3">
+						<img src="{{ post.author.avatar(36) }}" class="rounded-circle me-3" width="36" alt="{{ post.author.email }}">
+						{{ post.author.email }} said:
+					</a>
+					<div class="d-flex align-items-center text-muted">
+						<div class="d-flex align-items-center me-3">
+							<i class="bx bx-time-five fs-sm me-1"></i>
+							<span class="fs-sm"> {{ moment(post.timestamp).fromNow() }}</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</article

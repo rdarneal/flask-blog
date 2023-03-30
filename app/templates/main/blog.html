@@ -1,0 +1,47 @@
+{% extends "layouts/base.html" %}
+{% if template == "main.blog" %}
+{% set active_page = "blog" %}
+{% else %}
+{% set active_page = "explore" %}
+{% endif %}
+
+{% block content %}
+<section class="container mb-5 pt-3 pb-lg-5">
+	<!-- if view function passes a form (blog page), render the form -->
+	{% if form %}
+	<div class="container mb-4 pt-lg-2 pb-lg-3 py-1">
+		<form action="" method="post">
+			{{ form.hidden_tag() }}
+			<p>
+				<label for="floatingBlog" class="form-label">What's on your mind, {{ current_user.first_name }}?</label>
+				{{ form.post(cols=32, rows=4, class_='form-control', type='text', id='floatingBlog', placeholder='I took a long walk along a short path...') }}
+				{% for error in form.post.errors %}
+				<p class="text-danger fw-light">[{{ error }}]</p>
+                <script>
+                    var element = document.getElementById('floatingInput');
+                    element.className += " " + 'is-invalid';
+                </script>
+				{% endfor %}
+			</p>
+			{{ form.submit(class_='btn btn-primary', type='submit') }}
+		</form>
+	</div>
+	<hr>
+	{% endif %}
+
+	<!-- Blog section -->
+	<h4 class="mt-4 mb-4 pt-lg-2 pb-lg-3 py-1">
+		What's new?
+	</h4>
+
+	<!-- iterate over paginated posts passed from view function-->
+	<div class="pb-3">
+		{% for post in posts.items %}
+			{% include 'main/_post.html' %}
+		{% endfor %}
+	</div>
+
+	<!-- Pagination -->
+	{% include 'main/_pagination.html' %}
+</section>
+{% endblock %}
